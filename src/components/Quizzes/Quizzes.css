@@ -1,0 +1,15 @@
+.quizzes{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+}
+@media screen and (max-width:991px){
+    .quizzes{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width:600px){
+    .quizzes{
+        grid-template-columns: 1fr ;
+    }
+}

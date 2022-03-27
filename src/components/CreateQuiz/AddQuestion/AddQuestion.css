@@ -1,0 +1,38 @@
+.createQuizQuestions{
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+.createQuizQuestion{
+    max-height: 70vh;
+    overflow: auto;
+}
+.quizQuestions__title{
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #fff;
+}
+.answerAction{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+.mark_correct{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.fromActionBox{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    padding-right: 32px;
+    background-color: #fff;
+}

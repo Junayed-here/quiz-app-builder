@@ -1,0 +1,124 @@
+.createQuiz{
+    padding: 30px 0;
+}
+.createQuiz__top_info{
+    margin-bottom: 30px;
+}
+.createQuiz__title{
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: #fff;
+    margin: 0;
+}
+.createQuiz_subheading{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    margin: 0;
+}
+.createQuiz__view{
+    display: flex;
+    gap: 50px;
+}
+.createQuiz__ConfigView{
+    max-width: 450px;
+    width: 100%;
+    background-color: #fff;
+    height: max-content;
+    padding: 30px;
+}
+.createQuiz__ConfigView__title{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0;
+}
+.createQuiz__ConfigView__view{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 10px 0 20px 0;
+}
+.createQuiz__ConfigView__actions{
+    display: flex;
+    justify-content: space-between;
+}
+.createQuiz__questions{
+    width: 100%;
+}
+.createQuiz__question{
+    width: 100%;
+    background-color: #fff;
+    height: max-content;
+    padding: 30px;
+    position: relative;
+    margin-bottom: 20px;
+}
+.createQuiz__questionTitle{
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0;
+}
+.createQuiz__question_img,.createQuiz__question__answer__img{
+    max-width: 150px;
+    width: auto;
+    max-height: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+.createQuiz__question__answers{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    align-items: end;
+}
+.createQuiz__question__answer.correct {
+    border: 2px dotted green;
+    padding: 2px;
+}
+.createQuiz__question__answer__title{
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    position: relative;
+    padding-left: 25px;
+}
+.createQuiz__question__answer__title:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+.createQuiz__question__config{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.createQuiz__question__config__text{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 3px;
+    border: 1px dotted gray;
+    margin: 0;
+    margin-top: 15px;
+}
+.createQuiz__question__actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    width: 100%;
+}

@@ -1,0 +1,71 @@
+*{
+    box-sizing: border-box;
+}
+.app{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #2B2B2B;
+}
+.container{
+    max-width: 1170px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+.box-border {
+    border: 1px dotted red !important;
+    margin: 5px 0 !important;
+    padding: 15px !important;
+}
+/* button css*/
+.button{
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    border: 1px solid #aaaaaa;
+    padding: 10px;
+    width: 150px;
+    background: #efefef;
+    cursor: pointer;
+}
+.button:hover{
+    background: #aaaaaa;
+}
+.button-withIcon {
+    height: 25px;
+    width: 30px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    background-color: #fff;
+    border-color: #000;
+}
+.button-withIcon img{
+    width: 100%;
+    height: 100%;
+}
+.button-delete {
+    background-color: #ff9d9d;
+    border-color: #ff9d9d;
+}
+.button-delete:hover{
+    background-color: #ff5454;
+    border-color: #ff5454;
+}
+.button-edit{
+    background-color: #45b12e;
+    border-color: #45b12e;
+}
+.button-edit:hover{
+    background-color: #136e00;
+    border-color: #136e00;
+}
+.button-drag{
+    background-color: #6e7bf1;
+    border-color: #6e7bf1;
+}
+.button-drag:hover{
+    background-color: #2e3bb1;
+    border-color: #2e3bb1;
+}
+/* button css*/

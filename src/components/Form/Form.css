@@ -1,0 +1,26 @@
+.form{
+    width: 100%;
+    border: none;
+    margin: 0 auto;
+    padding: 30px 50px;
+    background-color: #fff;
+}
+.popup-form{
+    padding: 15px;
+    padding-bottom: 50px;
+}
+.formError{
+    display: block;
+    visibility: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 5px;
+    color: orangered;
+    text-align: center;
+}
+.fieldset{
+    border: none;
+    margin: 0;
+    padding: 0;
+}

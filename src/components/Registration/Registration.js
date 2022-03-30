@@ -1,16 +1,14 @@
 import './Registration.css';
 import React, {useState} from "react";
-import Signup from "../Signup/Signup";
-import Login from "../Login/Login";
-
-function Registration() {
-    const [login, setLogin] = useState(true);
-
+import Signup from "./Signup/Signup";
+import Login from "./Login/Login";
+function Registration(props) {
+    const [loginTab, setLoginTab] = useState(true);
     function clickLogin(e) {
-        setLogin(true);
+        setLoginTab(true);
     }
     function clickSignup() {
-        setLogin(false);
+        setLoginTab(false);
     }
     return (
         <div className="registration">
@@ -18,10 +16,10 @@ function Registration() {
             <p className="subheading registration__subheading">Please register or login</p>
             <div className="registration__form_window">
                 <div className="registration__option">
-                    <button className={`button button-registration__option `+ (login ? 'active' : '')} onClick={clickLogin}>Login</button>
-                    <button className={`button button-registration__option `+ (login ? '' : 'active')} onClick={clickSignup}>Register</button>
+                    <button className={`button button-registration__option `+ (loginTab ? 'active' : '')} onClick={clickLogin}>Login</button>
+                    <button className={`button button-registration__option `+ (loginTab ? '' : 'active')} onClick={clickSignup}>Register</button>
                 </div>
-                { login ? <Login /> : <Signup />}
+                { loginTab ? <Login handleLogin={props.handleLogin}/> : <Signup handleSignUp={props.handleSignUp} openLogin={clickLogin}/>}
             </div>
         </div>
     );

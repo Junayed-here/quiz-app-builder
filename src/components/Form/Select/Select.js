@@ -2,7 +2,10 @@ import './Select.css';
 
 function Select(props) {
     const customClass = props.customClass ? `${props.customClass}` : '';
-
+    function handleChange(e) {
+        console.log(props.onChange);
+        (props.onChange)? props.onChange(e.target.value) : '';
+    }
     return (
         <>
             <label className="label" htmlFor={props.id}>{props.label}</label>
@@ -12,7 +15,7 @@ function Select(props) {
                 className={`select select-${props.name} `+ customClass}
                 placeholder={props.placeholder}
                 required={props.required}
-                onKeyUp={props.handleKeyUp}
+                onChange={handleChange}
                 defaultValue={props.defaultValue}
             >
                 {props.children}

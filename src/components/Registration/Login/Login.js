@@ -1,9 +1,16 @@
-import Form from "../Form/Form";
-import Input from "../Form/Input/Input";
+import Form from "../../Form/Form";
+import Input from "../../Form/Input/Input";
 
-function Login() {
+function Login(props) {
+    function handleSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        // console.log({email,password});
+        props.handleLogin({email,password});
+    }
     return (
-        <Form handleSubmit='code'>
+        <Form handleSubmit={handleSubmit}>
             <fieldset className="fieldset">
                 <Input
                     type="email"
@@ -12,8 +19,6 @@ function Login() {
                     id="email"
                     required={true}
                     customClass=""
-                    maxLength={20}
-                    minLength={2}
                 />
                 <Input
                     type="password"
@@ -26,7 +31,7 @@ function Login() {
                 />
             </fieldset>
 
-            <button className="button button__role-submit" type="submit">Submit</button>
+            <button className="button button__role-submit registrationFromButton" type="submit">Submit</button>
         </Form>
     );
 }

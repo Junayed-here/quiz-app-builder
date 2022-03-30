@@ -6,12 +6,15 @@ import deleteIcon from "../../../images/delete.svg";
 
 const type = { BOX: "box" };
 
-const Question = ({ question, index, questionIndex, moveQuestion, handleEditQuestion }) => {
+const Question = ({ question, index, questionIndex, moveQuestion, handleEditQuestion, deleteQuestion }) => {
     const dragRef = useRef(null);
     const previewRef = useRef(null);
 
     function onEditQuestion() {
-        handleEditQuestion(questionIndex)
+        handleEditQuestion(questionIndex);
+    }
+    function onDeleteQuestion() {
+        deleteQuestion(questionIndex);
     }
 
     const [, drop] = useDrop({
@@ -89,7 +92,7 @@ const Question = ({ question, index, questionIndex, moveQuestion, handleEditQues
                 <button className="button button-withIcon button-edit" title="edit question" onClick={onEditQuestion}>
                     <img src={editIcon} alt="edit"/>
                 </button>
-                <button className="button button-withIcon button-delete" title="delete question">
+                <button className="button button-withIcon button-delete" onClick={onDeleteQuestion} title="delete question">
                     <img src={deleteIcon} alt="delete"/>
                 </button>
             </div>
@@ -98,7 +101,7 @@ const Question = ({ question, index, questionIndex, moveQuestion, handleEditQues
 };
 
 const QuestionList = (props) => {
-    // console.log(props.questions)
+    console.log(props.questions)
     const renderQuestion = (question, index) => {
         return question ? (
             <Question
@@ -107,6 +110,7 @@ const QuestionList = (props) => {
                 questionIndex={index}
                 key={index}
                 moveQuestion={props.moveQuestion}
+                deleteQuestion={props.deleteQuestion}
                 handleEditQuestion={props.handleEditQuestion}
             />
         ): null;

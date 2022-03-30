@@ -7,6 +7,7 @@ import deleteIcon from "../../../images/delete.svg";
 import {useEffect, useState} from "react";
 import {render} from "react-dom";
 import update from "immutability-helper";
+import Select from "../../Form/Select/Select";
 
 function randomGen() {
     return Math.floor(100000 + Math.random() * 900000);
@@ -44,7 +45,7 @@ function Answer(props) {
                     <CheckboxRadio
                         customClass="correctCheckbox"
                         name="correctAnswer"
-                        type="checkbox"
+                        type={(props.questionType === "single")? "radio" : "checkbox"}
                         id={`qs_${randomId}_C`}
                         defaultChecked={IsCorrect}
                         label="Mark as correct"
@@ -70,18 +71,8 @@ function Answer(props) {
 function AddQuestion(props) {
     const minAnswerLength = 2;
     const [answers, setAnswers] = useState([]);
-    const [initBlankAnswers, setInitBlankAnswers] = useState([
-        {
-            'IsCorrect': false,
-            'img': "",
-            'title': "",
-        },
-        {
-            'IsCorrect': false,
-            'img': "",
-            'title': "",
-        }
-    ])
+    const [questionType, setQuestionType] = useState("single");
+    const [initBlankAnswers, setInitBlankAnswers] = useState([]);
     const [deleteAnswerHidden, setDeleteAnswerHidden] = useState(true);
     let isCorrectChecked = false;
     let {title, img, points, type} = '';
@@ -90,16 +81,21 @@ function AddQuestion(props) {
     },[initBlankAnswers,answers])
 
 
-    if (props.questionConfig !== '' && props.questionConfig !== undefined){
+    if (props.editQuestionIndex !== '' && props.questionConfig !== undefined){
         ({title, img, points, type} = {...props.questionConfig});
         useEffect(()=>{
             setAnswers(props.questionConfig.answers)
-        }, [])
+        }, []);
     }
     function handleFormSubmit(e) {
         e.preventDefault();
         correctAnswerCheck();
 
+        const answerDom = document.getElementsByClassName('questionAnswer');
+        if(answerDom.length < minAnswerLength) {
+            alert("Please add minimum 2 answers")
+            return;
+        }
         if(!isCorrectChecked) {
             alert("Please select correct answer")
             return;
@@ -128,12 +124,11 @@ function AddQuestion(props) {
         }
 
         question.title = questionTitle;
+        question.type = questionType;
         question.img = questionImg;
         question.points = questionPoints;
         question.answers = newAnswers;
-        // props.handleSubmit(question)
-        console.log(question);
-        (props.createQuiz) ? props.handleNewSubmit(question) : props.handleSubmit(question);
+        props.questionSubmit(question);
     }
     function deleteAnswer(id) {
         document.getElementById(id).remove();
@@ -156,21 +151,33 @@ function AddQuestion(props) {
         }
     }
     function addAnswer() {
+        console.log(answers)
         const blankAnswer = {
             'IsCorrect': false,
             'img': "",
             'title': "",
         }
-        props.createQuiz
-            ?
-            setInitBlankAnswers(
-                update(initBlankAnswers, {$push: [blankAnswer]})
-            )
-            :
+        if(answers.length > 0){
             setAnswers(
                 update(answers, {$push: [blankAnswer]})
             )
+        }else{
+            setInitBlankAnswers(
+                update(initBlankAnswers, {$push: [blankAnswer]})
+            )
+        }
     }
+    function questionTypeChange(type) {
+        setQuestionType(type)
+    }
+    useEffect(()=>{
+        const correctAnsDom = document.getElementsByClassName('correctCheckbox');
+        if(correctAnsDom.length > 0){
+            for (let i = 0; i < correctAnsDom.length; i++) {
+                correctAnsDom[i].checked = false;
+            }
+        }
+    }, [questionType])
     return (
         <Popup handlePopupClose={props.handlePopupClose}>
             <div className="createQuizQuestions">
@@ -189,6 +196,17 @@ function AddQuestion(props) {
                                 id="qst"
                                 required={true}
                             />
+                            <Select
+                                name="quizView"
+                                id="quizView"
+                                label="Quiz View"
+                                required={true}
+                                onChange={questionTypeChange}
+                                defaultValue={questionType}
+                            >
+                                <option value="single">Single select</option>
+                                <option value="multiple">Multiple select</option>
+                            </Select>
                             <Input
                                 label="Question related image (optional):"
                                 className="input"
@@ -213,11 +231,11 @@ function AddQuestion(props) {
                                 (answers !== undefined && answers.length > 0)
                                     ?
                                     answers.map((item, index)=>(
-                                        (<Answer deleteAnswerHidden={deleteAnswerHidden} item={item} key={index} deleteAnswer={deleteAnswer}/>)
+                                        (<Answer questionType={questionType} deleteAnswerHidden={deleteAnswerHidden} item={item} key={index} deleteAnswer={deleteAnswer}/>)
                                     ))
                                     :
                                     initBlankAnswers.map((item, index)=>(
-                                        <Answer deleteAnswerHidden={deleteAnswerHidden} item={item} key={index} deleteAnswer={deleteAnswer}/>
+                                        <Answer questionType={questionType} deleteAnswerHidden={deleteAnswerHidden} item={item} key={index} deleteAnswer={deleteAnswer}/>
                                     ))
                             }
                         </fieldset>
@@ -225,7 +243,7 @@ function AddQuestion(props) {
                             <button className="button" type="button"
                                     onClick={addAnswer}>Add answer</button>
                             <button className="button" type="submit">Done</button>
-                            <button className="button" type="reset" onClick={props.handlePopupClose}>Cancel</button>
+                            <button className="button" type="reset" onClick={props.onClose}>Cancel</button>
                         </fieldset>
                     </Form>
                 </div>

@@ -1,5 +1,5 @@
 import './Home.css';
-import Quizzes from "../Quizzes/Quizzes"
+import Quizzes from "./Quizzes/Quizzes"
 function Home(props) {
     return (
         <div className="home">
@@ -9,7 +9,7 @@ function Home(props) {
                     <h2 className="hope_subheading">Variety of quizzes for you. The choice is yours</h2>
                     <button className="button" onClick={props.handleNewQuizConfigOpen}>Create quiz</button>
                 </div>
-                <Quizzes />
+                <Quizzes quizzes={props.quizzes} quizEdit={props.quizEdit}/>
             </div>
         </div>
     );

@@ -2,7 +2,8 @@ import dragIcon from "../../images/drag.svg";
 import editIcon from "../../images/edit.svg";
 import deleteIcon from "../../images/delete.svg";
 import './ViewQuiz.css';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useParams} from 'react-router-dom';
 import CheckboxRadio from "../Form/CheckboxRadio/CheckboxRadio";
 import update from "immutability-helper";
 function randomGen() {
@@ -10,20 +11,32 @@ function randomGen() {
 }
 
 function ViewQuiz(props) {
-    const quiz = props.quiz.quiz;
-    const questions = props.quiz.questions;
-    const quizView = props.quiz.quiz.view;
+    const params = useParams();
+    // console.log(params.quizId);
+    const quizId = parseInt(params.quizId);
+    const quizzes = props.quizzes;
+    let totalPoints = 0;
+    let quiz , questions, quizView = '';
     const quizViewAll = (quizView === "all");
-    console.log(props.quiz.quiz.view);
-    const randomId = randomGen();
-    let score = 0;
+    if (quizzes.length > 0){
+        quizzes.map((item,index)=>{
+            if(item.quiz.id === quizId){
+                quiz = item.quiz;
+                quizView = item.quiz.view;
+                questions = item.questions;
+            }
+        });
+    }
+    const [score, setScore] = useState(0);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [allAnswered, setAllAnswered] = useState(false);
     let notAnswered = true;
     let answersCollectionFromQuiz = [];
     let answersCollectionFromUser = [];
     function quizAnswersWithPoints() {
         questions.map((question) => {
             const points = question.points;
+            totalPoints += parseInt(points);
             const correctAnswers = [];
             question.answers.map((answer,index) => {
                 if (answer.IsCorrect){
@@ -33,14 +46,15 @@ function ViewQuiz(props) {
             answersCollectionFromQuiz.push({points,correctAnswers})
         });
     }
-    quizAnswersWithPoints()
+    quizAnswersWithPoints();
     function collectUserAnswers(questionIndex,answerIndex,method,questionWrapper) {
         const customDomSelect = document.getElementById(questionWrapper);
         if (method === "ADD"){
             let added = false;
-            if(answersCollectionFromUser.length < 1){
+            if(answersCollectionFromUser.length === 0){
                 answersCollectionFromUser.push({questionIndex: questionIndex,answerIndex: [answerIndex]});
                 added = true;
+                // console.log(answersCollectionFromQuiz, answersCollectionFromUser);
             }
             answersCollectionFromUser.map((item,index)=>{
                 if(item.questionIndex === questionIndex && !added){
@@ -50,8 +64,10 @@ function ViewQuiz(props) {
             });
             (!added) ? answersCollectionFromUser.push({questionIndex: questionIndex,answerIndex: [answerIndex]}) : '';
             (customDomSelect !== null)?customDomSelect.classList.remove('not-answered'):'';
+            // console.log(answersCollectionFromUser);
         }else if (method === "REMOVE"){
             answersCollectionFromUser.map((item,index)=>{
+                // console.log(item ,questionIndex);
                 if(item.questionIndex === questionIndex){
                     const deleteItemIndex = answersCollectionFromUser[index].answerIndex.indexOf(answerIndex);
                     answersCollectionFromUser[index].answerIndex.splice(deleteItemIndex, 1);
@@ -64,18 +80,21 @@ function ViewQuiz(props) {
                 }
             });
         }
+        // console.log(answersCollectionFromUser);
     }
     function scoreDetermine() {
+        let currentScore = 0;
         answersCollectionFromUser.map((item)=>{
             const quizAnswer = answersCollectionFromQuiz[item.questionIndex].correctAnswers;
             const userAnswer = item.answerIndex;
             if (quizAnswer.length === userAnswer.length){
                 const checkValues =  !quizAnswer.map((e, i) => e == userAnswer[i]).includes(false)
                 if(checkValues){
-                    score = score + parseInt(answersCollectionFromQuiz[item.questionIndex].points);
+                    currentScore = currentScore + parseInt(answersCollectionFromQuiz[item.questionIndex].points);
                 }
             }
-        })
+        });
+        setScore(currentScore);
     }
     function checkUncheck(e) {
         let method = '';
@@ -83,7 +102,6 @@ function ViewQuiz(props) {
         let answerIndex = e.target.getAttribute('data-answer-index');
         let questionWrapper = e.target.getAttribute('data-wrapper');
         e.target.checked ? method = "ADD" : method = "REMOVE";
-        console.log(parseInt(questionIndex),parseInt(answerIndex),method,questionWrapper);
         collectUserAnswers(parseInt(questionIndex),parseInt(answerIndex),method,questionWrapper);
     }
     function checkUnmarkQuestion() {
@@ -91,64 +109,128 @@ function ViewQuiz(props) {
         (notAnsweredDom.length === 0) ? notAnswered = false : notAnswered = true;
     }
     function handleFinishTest() {
-        checkUnmarkQuestion()
+        checkUnmarkQuestion();
         if (!notAnswered){
-            score = 0;
-            scoreDetermine()
-            console.log(score);
+            setScore(0);
+            scoreDetermine();
+            setAllAnswered(true);
         }else{
             alert('please answer all question');
         }
     }
     function handleNextQuestion() {
         let checkboxes = document.getElementsByClassName('answerCheckBox');
-        scoreDetermine();
-        console.log(answersCollectionFromQuiz, answersCollectionFromUser);
-        console.log(score);
-        // console.log(questions.length , currentQuestionIndex)
-        if ((currentQuestionIndex + 1) < questions.length){
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        }
-        for (let i=0; i<checkboxes.length;i++){
-            checkboxes[i].checked = false;
-            console.log(checkboxes[i].checked)
-        }
+        notAnswered = true;
+        checkUnmarkQuestion();
+        if (!notAnswered){
+            answersCollectionFromUser.map((item)=>{
+                const quizAnswer = answersCollectionFromQuiz[item.questionIndex].correctAnswers;
+                const userAnswer = item.answerIndex;
+                const checkValues =  !quizAnswer.map((e, i) => e === userAnswer[i]).includes(false)
+                if(checkValues){
+                    setScore(score + parseInt(answersCollectionFromQuiz[item.questionIndex].points))
+                }
+            })
 
-        // console.log(checkboxes.length)
+            if ((currentQuestionIndex + 1) < questions.length){
+                setCurrentQuestionIndex(currentQuestionIndex + 1);
+            }else {
+                setAllAnswered(true);
+            }
+
+            for (let i=0; i<checkboxes.length;i++){
+                checkboxes[i].checked = false;
+            }
+        }else{
+            alert('please answer all question');
+        }
     }
 
+    console.log(allAnswered);
     return(
         <>
-            <div className="ViewQuiz">
-                <h3 className="ViewQuiz__title">{quiz.title}</h3>
-                <div className="createQuiz__questions">
-                    {
-                        (quizViewAll)
-                            ?
-                            (
-                                <>
-                                    {
-                                        questions.map((question,index)=>(
-                                            <div className="viewQuestion__box not-answered" id={`viewQuestion-${index}`} key={index}>
+            {
+                (!allAnswered) ?
+                    (
+                        <div className="ViewQuiz">
+                            <h3 className="ViewQuiz__title">{quiz.title}</h3>
+                            <div className="createQuiz__questions">
+                                {
+                                    (quizViewAll)
+                                        ?
+                                        (
+                                            <>
+                                                {
+                                                    questions.map((question,index)=>(
+                                                        <div className="viewQuestion__box not-answered" id={`viewQuestion-${index}`} key={index}>
+                                                            <div className="createQuiz__question_question">
+                                                                {
+                                                                    (question.img !== '' && question.img !== null) &&
+                                                                    (
+                                                                        <img className="createQuiz__question_img" src={question.img} alt="Img"/>
+                                                                    )
+
+                                                                }
+                                                                <h3 className="createQuiz__questionTitle">
+                                                                    {index + 1}. {question.title}
+                                                                </h3>
+                                                            </div>
+
+                                                            <div className={`createQuiz__question__answers question-type-${question.type}`}>
+                                                                {
+                                                                    question.answers.map((answer, answerIndex)=>(
+                                                                        <label className="label label_answerCheckBox" key={answerIndex}>
+                                                                            <div
+                                                                                className={`answerCheckBox ${(answer.IsCorrect) ? 'correct' : ''}`}
+                                                                            >
+                                                                                {
+                                                                                    (answer.img !== '' && answer.img !== null) &&
+                                                                                    (
+                                                                                        <img className="answerCheckBox__img" src={answer.img} alt="Img"/>
+                                                                                    )
+                                                                                }
+                                                                                <input
+                                                                                    name={`question-${index}`}
+                                                                                    type={(question.type === "single") ? 'radio' : 'checkbox'}
+                                                                                    className="answerCheckBox"
+                                                                                    data-question-index={index}
+                                                                                    data-answer-index={answerIndex}
+                                                                                    data-wrapper={`viewQuestion-${index}`}
+                                                                                    onChange={(e)=>{checkUncheck(e)}}
+                                                                                />
+                                                                                {answer.title}
+                                                                            </div>
+                                                                        </label>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                }
+                                            </>
+                                        )
+                                        :
+                                        (
+                                            <div className="viewQuestion__box not-answered" id={`viewQuestion-${currentQuestionIndex}`}>
                                                 <div className="createQuiz__question_question">
                                                     {
-                                                        (question.img !== '' && question.img !== null) &&
+                                                        (questions[currentQuestionIndex].img !== '' && questions[currentQuestionIndex].img !== null) &&
                                                         (
-                                                            <img className="createQuiz__question_img" src={question.img} alt="Img"/>
+                                                            <img className="createQuiz__question_img" src={questions[currentQuestionIndex].img} alt="Img"/>
                                                         )
 
                                                     }
                                                     <h3 className="createQuiz__questionTitle">
-                                                        {question.title}
+                                                        {currentQuestionIndex + 1}. {questions[currentQuestionIndex].title}
                                                     </h3>
                                                 </div>
 
-                                                <div className={`createQuiz__question__answers question-type-${question.type}`}>
+                                                <div className={`createQuiz__question__answers question-type-${questions[currentQuestionIndex].type}`}>
                                                     {
-                                                        question.answers.map((answer, answerIndex)=>(
+                                                        questions[currentQuestionIndex].answers.map((answer, answerIndex)=>(
                                                             <label className="label label_answerCheckBox" key={answerIndex}>
                                                                 <div
-                                                                    className={`answerCheckBox ${(answer.IsCorrect) ? 'correct' : ''}`}
+                                                                    className={`answerCheckBox_outer ${(answer.IsCorrect) ? 'correct' : ''}`}
                                                                 >
                                                                     {
                                                                         (answer.img !== '' && answer.img !== null) &&
@@ -157,12 +239,12 @@ function ViewQuiz(props) {
                                                                         )
                                                                     }
                                                                     <input
-                                                                        name={`question-${index}`}
-                                                                        type="checkbox"
+                                                                        name="answerCheckBox"
+                                                                        type={(questions[currentQuestionIndex].type === "single") ? 'radio' : 'checkbox'}
                                                                         className="answerCheckBox"
-                                                                        data-question-index={index}
+                                                                        data-question-index={currentQuestionIndex}
                                                                         data-answer-index={answerIndex}
-                                                                        data-wrapper={`viewQuestion-${index}`}
+                                                                        data-wrapper={`viewQuestion-${currentQuestionIndex}`}
                                                                         onChange={(e)=>{checkUncheck(e)}}
                                                                     />
                                                                     {answer.title}
@@ -172,76 +254,36 @@ function ViewQuiz(props) {
                                                     }
                                                 </div>
                                             </div>
-                                        ))
-                                    }
-                                </>
-                            )
-                            :
-                            (
-                                <div className="viewQuestion__box not-answered" id={`viewQuestion viewQuestion-${currentQuestionIndex}`}>
-                                    <div className="createQuiz__question_question">
-                                        {
-                                            (questions[currentQuestionIndex].img !== '' && questions[currentQuestionIndex].img !== null) &&
-                                            (
-                                                <img className="createQuiz__question_img" src={questions[currentQuestionIndex].img} alt="Img"/>
-                                            )
+                                        )
+                                }
+                            </div>
+                            {
+                                (quizViewAll)
+                                    ?
+                                    (
+                                        <>
+                                            <button className="button" onClick={handleFinishTest}>Submit</button>
+                                        </>
+                                    )
+                                    :
+                                    (
+                                        <>
+                                            <button className="button button_singleView_next" onClick={handleNextQuestion}>{(allAnswered ? "Submit" : "Next")}</button>
+                                        </>
+                                    )
+                            }
 
-                                        }
-                                        <h3 className="createQuiz__questionTitle">
-                                            {questions[currentQuestionIndex].title}
-                                        </h3>
-                                    </div>
-
-                                    <div className={`createQuiz__question__answers question-type-${questions[currentQuestionIndex].type}`}>
-                                        {
-                                            questions[currentQuestionIndex].answers.map((answer, answerIndex)=>(
-                                                <label className="label label_answerCheckBox" key={answerIndex}>
-                                                    <div
-                                                        className={`answerCheckBox_outer ${(answer.IsCorrect) ? 'correct' : ''}`}
-                                                    >
-                                                        {
-                                                            (answer.img !== '' && answer.img !== null) &&
-                                                            (
-                                                                <img className="answerCheckBox__img" src={answer.img} alt="Img"/>
-                                                            )
-                                                        }
-                                                        <input
-                                                            name={`question-${currentQuestionIndex}`}
-                                                            type="checkbox"
-                                                            className="answerCheckBox"
-                                                            data-question-index={currentQuestionIndex}
-                                                            data-answer-index={answerIndex}
-                                                            data-wrapper={`viewQuestion-${currentQuestionIndex}`}
-                                                            onChange={(e)=>{checkUncheck(e)}}
-                                                        />
-                                                        {answer.title}
-                                                    </div>
-                                                </label>
-                                            ))
-                                        }
-                                    </div>
-                                </div>
-                            )
-                    }
-                </div>
-                {
-                    (quizViewAll)
-                        ?
-                        (
-                            <>
-                                <button className="button" onClick={handleFinishTest}>Submit</button>
-                            </>
-                        )
-                        :
-                        (
-                            <>
-                                {/*<button className="button button_singleView_submit" onClick={handleFinishTest}>Submit</button>*/}
-                                <button className="button button_singleView_next" onClick={handleNextQuestion}>Next</button>
-                            </>
-                        )
-                }
-
-            </div>
+                        </div>
+                    )
+                    :
+                    (
+                        <div className="scoreBoard">
+                            <h1 className="scoreBoard__title">Out of {totalPoints} Your score is.</h1>
+                            <h1 className="scoreBoard__score">{score}</h1>
+                            <a href="/">Go to home page</a>
+                        </div>
+                    )
+            }
         </>
     )
 }

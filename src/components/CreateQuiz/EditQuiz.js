@@ -1,40 +1,44 @@
 import './CreateQuiz.css';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { DndProvider } from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import QuestionList from './QuestionView/QuestionView';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-function CreateQuiz(props) {
-    const   navigate = useNavigate();
+function EditQuiz(props) {
+    const params = useParams();
+    const editQuizId = parseInt(params.quizId);
+    const navigate = useNavigate();
+    const quizzes = props.quizzes;
     const moveQuestion = props.moveQuestion;
     const createQuiz = props.createQuiz;
     const newQuiz = props.newQuiz;
     let quiz = '';
     let questions = '';
 
-    console.log(newQuiz.quiz === undefined)
-    if (newQuiz.quiz === undefined){
-        navigate(`/`);
-    }
+    useEffect(()=>{
+        console.log(editQuizId);
+        if (editQuizId !== NaN && editQuizId !== undefined){
+            props.quizEdit(editQuizId);
+        }
+    },[]);
 
-    if (createQuiz && newQuiz.quiz !== undefined){
+    if (newQuiz.quiz){
         quiz = newQuiz.quiz;
         questions = newQuiz.questions;
-    }else{
-        navigate(`/`);
     }
-
 
     function editConfig() {
         props.editQuizConfigOpen();
     }
     function editQuestion(index) {
+        console.log(index)
         props.editQuestionOpen(index);
     }
     function addQuestionOpen() {
         props.addQuestionOpen();
     }
+
     function handleSubmitQuiz() {
         props.handleSubmitQuiz({...props.newQuiz});
     }
@@ -44,7 +48,7 @@ function CreateQuiz(props) {
     }
     function deleteQuiz(index) {
         console.log(quiz.id)
-        // props.deleteQuestion(index);
+        props.deleteQuiz(quiz.id);
     }
 
     return (
@@ -92,5 +96,5 @@ function CreateQuiz(props) {
     );
 }
 
-export default CreateQuiz;
+export default EditQuiz;
 

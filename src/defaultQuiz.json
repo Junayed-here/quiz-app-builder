@@ -1,0 +1,98 @@
+[
+  {
+    "quiz": {
+      "id": 1,
+      "title": "Front-end Basic",
+      "view": "all"
+    },
+    "questions": [
+      {
+        "id": 1,
+        "title": "What is HTML stands for?",
+        "img": "https://source.unsplash.com/random/300×300",
+        "points": "5",
+        "type": "single",
+        "answers": [
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Hyper Tension"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Hyper Text Machine Learning"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Hyper Text"
+          },
+          {
+            "IsCorrect": true,
+            "img": "",
+            "title": "Hyper Text Markup Language"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Mark client-side languages.",
+        "img": "",
+        "points": "5",
+        "type": "multiple",
+        "answers": [
+          {
+            "IsCorrect": true,
+            "img": "",
+            "title": "HTML"
+          },
+          {
+            "IsCorrect": true,
+            "img": "https://source.unsplash.com/random/200×200",
+            "title": "CSS"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Java"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "PHP"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Dhaka is capital of?",
+        "img": "",
+        "points": "5",
+        "type": "single",
+        "answers": [
+          {
+            "IsCorrect": true,
+            "img": "",
+            "title": "Bangladesh"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Japan"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Chili"
+          },
+          {
+            "IsCorrect": false,
+            "img": "",
+            "title": "Denmark"
+          }
+        ]
+      }
+    ]
+  }
+]

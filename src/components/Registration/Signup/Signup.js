@@ -1,9 +1,21 @@
-import Form from "../Form/Form";
-import Input from "../Form/Input/Input";
+import Form from "../../Form/Form";
+import Input from "../../Form/Input/Input";
 
-function Signup() {
+function Signup(props) {
+    function handleSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const user = {name,email,password};
+        props.handleSignUp(user);
+        props.openLogin();
+        console.log("Signup Successful");
+        // localStorage.setItem('quizAppBuilder', JSON.stringify(user));
+
+    }
     return (
-        <Form handleSubmit='code'>
+        <Form handleSubmit={handleSubmit}>
             <fieldset className="fieldset">
                 <Input
                     type="text"
@@ -22,8 +34,6 @@ function Signup() {
                     id="email"
                     required={true}
                     customClass=""
-                    maxLength={20}
-                    minLength={2}
                 />
                 <Input
                     type="password"
@@ -36,7 +46,7 @@ function Signup() {
                 />
             </fieldset>
 
-            <button className="button button__role-submit" type="submit">Submit</button>
+            <button className="button button__role-submit registrationFromButton" type="submit">Submit</button>
         </Form>
     );
 }

@@ -5,27 +5,50 @@ import Form from "../../Form/Form";
 import Select from "../../Form/Select/Select";
 
 
+function randomGen() {
+    return Math.floor(100000 + Math.random() * 900000);
+}
 
 function QuizConfig(props) {
+    const newQuiz = props.newQuiz;
+    let quiz = {};
     let quizTitle = '';
     let quizView = 'single';
+    let quizId = '';
     let createQuiz = props.createQuiz;
+    // let quizId = '';
+    // if (props.quizConfig !== '' || props.quizConfig !== undefined || !createQuiz){
+    //     quizTitle = props.quizConfig.title;
+    //     quizView = props.quizConfig.view;
+    //     quizId = props.quizConfig.id;
+    // }
+    // console.log(newQuiz,newQuiz.length,newQuiz.quiz);
 
-    if (props.quizConfig !== '' || props.quizConfig !== undefined || !createQuiz){
-        quizTitle = props.quizConfig.title;
-        quizView = props.quizConfig.view;
+    if(newQuiz.quiz){
+        quizTitle = newQuiz.quiz.title
+        quizView = newQuiz.quiz.view
     }
     function handleFormSubmit(e) {
         e.preventDefault();
-        let quiz = new Object();
         quiz.title = document.getElementById("quizName").value;
         quiz.view = document.getElementById("quizView").value;
-        if (!createQuiz){
-            props.handleEditSubmit(quiz);
+        if (createQuiz && newQuiz.quiz === undefined){
+            quiz.id = randomGen();
         }else{
-            props.handleNewSubmit(quiz);
+            quiz.id = newQuiz.quiz.id;
         }
 
+        if(newQuiz.quiz){
+            props.editConfigSubmit(quiz);
+        }else{
+            props.createConfigSubmit(quiz);
+        }
+
+        // console.log(quizId);
+        // else{
+        //     console.log(quiz);
+        //     props.handleNewSubmit(quiz);
+        // }
     }
 
     return (

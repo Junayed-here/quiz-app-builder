@@ -1,5 +1,5 @@
 import './CreateQuiz.css';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { DndProvider } from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import QuestionList from './QuestionView/QuestionView';
@@ -10,22 +10,23 @@ function CreateQuiz(props) {
     const moveQuestion = props.moveQuestion;
     const createQuiz = props.createQuiz;
     const newQuiz = props.newQuiz;
+    const [newData, setNewData] = useState(!!newQuiz.quiz);
     let quiz = '';
     let questions = '';
 
-    console.log(newQuiz.quiz === undefined)
-    if (newQuiz.quiz === undefined){
-        navigate(`/`);
-    }
+    useEffect(()=>{
+        if(!newData){
+            navigate('/');
+        }
+    },[newData])
+
+    console.log(newQuiz.quiz);
+    console.log(newData);
 
     if (createQuiz && newQuiz.quiz !== undefined){
         quiz = newQuiz.quiz;
         questions = newQuiz.questions;
-    }else{
-        navigate(`/`);
     }
-
-
     function editConfig() {
         props.editQuizConfigOpen();
     }
@@ -41,10 +42,6 @@ function CreateQuiz(props) {
     function deleteQuestion(index) {
         console.log(index)
         props.deleteQuestion(index);
-    }
-    function deleteQuiz(index) {
-        console.log(quiz.id)
-        // props.deleteQuestion(index);
     }
 
     return (
@@ -62,7 +59,6 @@ function CreateQuiz(props) {
                             <button className="button" onClick={editConfig}>Edit Quiz Config</button>
                             <button className="button" onClick={addQuestionOpen}>Add Question</button>
                             <button className="button" onClick={handleSubmitQuiz}>Submit</button>
-                            <button className="button" onClick={deleteQuiz}>Delete this quiz</button>
                         </div>
                     </div>
                     <div className="createQuiz__questions">

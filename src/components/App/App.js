@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useState, useEffect} from "react";
-import {Route, useNavigate, NavLink, Routes, Navigate} from 'react-router-dom';
+import {Route, useNavigate, Routes, Navigate} from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Registration from "../Registration/Registration";

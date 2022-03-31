@@ -5,7 +5,6 @@ import Form from "../../Form/Form";
 import CheckboxRadio from "../../Form/CheckboxRadio/CheckboxRadio";
 import deleteIcon from "../../../images/delete.svg";
 import {useEffect, useState} from "react";
-import {render} from "react-dom";
 import update from "immutability-helper";
 import Select from "../../Form/Select/Select";
 
@@ -151,7 +150,6 @@ function AddQuestion(props) {
         }
     }
     function addAnswer() {
-        // console.log(answers)
         const blankAnswer = {
             'IsCorrect': false,
             'img': "",

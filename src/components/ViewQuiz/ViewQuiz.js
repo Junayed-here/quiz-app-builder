@@ -1,18 +1,9 @@
-import dragIcon from "../../images/drag.svg";
-import editIcon from "../../images/edit.svg";
-import deleteIcon from "../../images/delete.svg";
 import './ViewQuiz.css';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useParams} from 'react-router-dom';
-import CheckboxRadio from "../Form/CheckboxRadio/CheckboxRadio";
-import update from "immutability-helper";
-function randomGen() {
-    return Math.floor(100000 + Math.random() * 900000);
-}
 
 function ViewQuiz(props) {
     const params = useParams();
-    // console.log(params.quizId);
     const quizId = parseInt(params.quizId);
     const quizzes = props.quizzes;
     let totalPoints = 0;
@@ -54,7 +45,6 @@ function ViewQuiz(props) {
             if(answersCollectionFromUser.length === 0){
                 answersCollectionFromUser.push({questionIndex: questionIndex,answerIndex: [answerIndex]});
                 added = true;
-                // console.log(answersCollectionFromQuiz, answersCollectionFromUser);
             }
             answersCollectionFromUser.map((item,index)=>{
                 if(item.questionIndex === questionIndex && !added){
@@ -64,10 +54,8 @@ function ViewQuiz(props) {
             });
             (!added) ? answersCollectionFromUser.push({questionIndex: questionIndex,answerIndex: [answerIndex]}) : '';
             (customDomSelect !== null)?customDomSelect.classList.remove('not-answered'):'';
-            // console.log(answersCollectionFromUser);
         }else if (method === "REMOVE"){
             answersCollectionFromUser.map((item,index)=>{
-                // console.log(item ,questionIndex);
                 if(item.questionIndex === questionIndex){
                     const deleteItemIndex = answersCollectionFromUser[index].answerIndex.indexOf(answerIndex);
                     answersCollectionFromUser[index].answerIndex.splice(deleteItemIndex, 1);
@@ -80,7 +68,6 @@ function ViewQuiz(props) {
                 }
             });
         }
-        // console.log(answersCollectionFromUser);
     }
     function scoreDetermine() {
         let currentScore = 0;
@@ -145,8 +132,6 @@ function ViewQuiz(props) {
             alert('please answer all question');
         }
     }
-
-    console.log(allAnswered);
     return(
         <>
             {

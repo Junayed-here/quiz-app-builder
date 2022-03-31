@@ -17,7 +17,6 @@ function EditQuiz(props) {
     let questions = '';
 
     useEffect(()=>{
-        // console.log(editQuizId);
         if (editQuizId !== NaN && editQuizId !== undefined){
             props.quizEdit(editQuizId);
         }
@@ -32,7 +31,6 @@ function EditQuiz(props) {
         props.editQuizConfigOpen();
     }
     function editQuestion(index) {
-        // console.log(index)
         props.editQuestionOpen(index);
     }
     function addQuestionOpen() {
@@ -43,11 +41,9 @@ function EditQuiz(props) {
         props.handleSubmitQuiz({...props.newQuiz});
     }
     function deleteQuestion(index) {
-        // console.log(index)
         props.deleteQuestion(index);
     }
-    function deleteQuiz(index) {
-        // console.log(quiz.id)
+    function deleteQuiz() {
         props.deleteQuiz(quiz.id);
     }
 

@@ -6,7 +6,6 @@ function Login(props) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        // console.log({email,password});
         props.handleLogin({email,password});
     }
     return (

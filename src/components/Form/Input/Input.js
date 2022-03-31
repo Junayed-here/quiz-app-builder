@@ -2,7 +2,6 @@ import './Input.css';
 
 function Input(props) {
     const customClass = props.customClass ? `${props.customClass}` : '';
-    const type = props.type;
 
     return (
         <>
@@ -17,7 +16,6 @@ function Input(props) {
                 required={props.required}
                 minLength={props.minLength}
                 maxLength={props.maxLength}
-                onKeyUp={props.handleKeyUp}
                 ref={props.ref}
             />
         </>

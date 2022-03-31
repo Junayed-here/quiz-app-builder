@@ -8,6 +8,7 @@
     box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(40px);
     border-radius: 40px 0;
+    padding: 0 20px;
 }
 .popup__close{
     position: absolute;
@@ -33,4 +34,16 @@
 .popup__body{
     margin-top: 50px;
     overflow: auto;
+}
+@media screen and (max-width: 768px){
+    .quizConfig_box__title{
+        font-size: 26px;
+    }
+    .popup__close{
+        top: 15px;
+        right: 15px;
+    }
+    .popup .button{
+        width: auto;
+    }
 }

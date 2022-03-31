@@ -3,7 +3,6 @@ import './Select.css';
 function Select(props) {
     const customClass = props.customClass ? `${props.customClass}` : '';
     function handleChange(e) {
-        // console.log(props.onChange);
         (props.onChange)? props.onChange(e.target.value) : '';
     }
     return (

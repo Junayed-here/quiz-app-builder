@@ -144,3 +144,38 @@
     margin: 10px;
     width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+    .createQuiz__view{
+        display: block;
+    }
+    .createQuiz__ConfigView{
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+    .createQuiz__title{
+        font-size: 24px;
+    }
+    .createQuiz_subheading{
+        font-size: 16px;
+    }
+    .createQuiz__ConfigView__title{
+        font-size: 22px;
+    }
+    .createQuiz__ConfigView__view {
+        font-size: 16px;
+        margin: 5px 0 15px 0;
+    }
+    .createQuiz__ConfigView__actions{
+        gap: 5px;
+    }
+    .createQuiz__question{
+        padding-top: 45px;
+    }
+    .createQuiz__question__config__text{
+        font-size: 14px;
+    }
+    .createQuiz__questions{
+        padding: 10px;
+    }
+}

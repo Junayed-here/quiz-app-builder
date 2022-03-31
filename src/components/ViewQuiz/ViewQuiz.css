@@ -2,7 +2,7 @@
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
-    padding-top: 30px;
+    padding: 30px;
 }
 .ViewQuiz__title {
     font-family: 'Inter', sans-serif;
@@ -84,4 +84,10 @@
     margin: 0;
     text-align: center;
     color: #80cbff;
+}
+
+@media screen and (max-width: 768px){
+    .ViewQuiz{
+        padding: 15px;
+    }
 }

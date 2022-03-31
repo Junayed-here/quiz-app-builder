@@ -13,10 +13,6 @@ import ViewQuiz from "../ViewQuiz/ViewQuiz";
 import update from "immutability-helper";
 import Nav from "../Navigation/Navigation";
 
-// import UserContext from '../../context/UserContext'
-// const user = React.useContext(UserContext);
-// console.log(user)
-
 function App() {
     const   navigate = useNavigate();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('quizAppBuilderLoggedInUser')));
@@ -33,11 +29,8 @@ function App() {
 
     useEffect(()=>{
         localStorage.setItem('quizAppBuilderQuizzes', JSON.stringify(quizzes));
-        // console.log(quizzes)
     },[quizzes]);
-    // useEffect(()=>{
-    //     console.log(newQuiz);
-    // },[newQuiz])
+
     function handleSignUp(data) {
         localStorage.setItem('quizAppBuilderUser', JSON.stringify(data));
     }
@@ -50,7 +43,6 @@ function App() {
                 setUser({name,email});
                 setLoggedIn(true);
                 navigate(`/`);
-                // console.log("Signup Successful");
             }else{
                 alert("email or password didn't match!");
             }
@@ -74,7 +66,6 @@ function App() {
             update(newQuiz, {'questions': {$splice: [[dragIndex, 1], [hoverIndex, 0, draggedQuestion]]}})
         );
     }
-
     function newQuizConfigOpen() {
         setCreateQuiz(true);
         setIsQuizConfigOpen(true);
@@ -91,11 +82,8 @@ function App() {
         setIsAddQuestionOpen(true);
     }
     function quizEdit(quizEditIndex){
-        // console.log(quizzes)
         quizzes.map((item,index)=>{
-            // console.log(item.quiz.id , quizEditIndex,newQuiz)
             if (item.quiz.id === quizEditIndex){
-                // console.log("edit ", item);
                 let selectedQuiz = item.quiz;
                 let selectedQuizQuestion = item.questions;
                 setNewQuiz(
@@ -106,7 +94,6 @@ function App() {
             }
         })
     }
-
     function createConfigSubmit(data) {
         setNewQuiz(
             update(newQuiz, {'quiz': {$set: {...data}},'questions': {$set: ''}})
@@ -121,7 +108,6 @@ function App() {
         onPopupClose();
     }
     function deleteQuestion(index) {
-        // console.log(index);
         setNewQuiz(
             update(newQuiz, {'questions': { $splice: [[index, 1]] } })
         )
@@ -139,7 +125,6 @@ function App() {
         setNewQuiz([]);
     }
     function questionSubmit(data) {
-        // console.log(data,editQuestionIndex);
         if (editQuestionIndex !== ''){
             setNewQuiz(
                 update(newQuiz, {'questions': {[editQuestionIndex]: {$merge: data}}})
@@ -161,7 +146,7 @@ function App() {
         localStorage.setItem('quizAppBuilderQuizzes', JSON.stringify(quizzes));
     }
     function handleSubmitQuiz(data) {
-        if(quizzes.length !== 0) {
+        if(quizzes !== null && quizzes.length !== 0) {
             let quizMatch = false;
             let quizMatchId ;
             quizzes.map((item,index)=>{
@@ -170,7 +155,6 @@ function App() {
                     quizMatchId = index;
                 }
             });
-            // console.log(quizMatch,quizMatchId)
             if (quizMatch){
                 setQuizzes(
                     update(quizzes, {[quizMatchId]: {$merge: data}})
@@ -185,15 +169,11 @@ function App() {
                 update(quizzes, {$set: [{...data}]})
             )
         }
-        // console.log(data);
-        // console.log( quizzes);
         handleQuizAddDb();
         onPopupClose();
         setNewQuiz([]);
         navigate('/');
     }
-
-
 
     return (
         <UserContext.Provider value={user}>
@@ -266,9 +246,6 @@ function App() {
                     onClose={onPopupClose}
                     questionSubmit={questionSubmit}
                     handlePopupClose={onPopupClose}
-                    // editQuestionSubmit={editQuestionSubmit}
-                    // handleNewSubmit={handleNewAddQuestionSubmit}
-                    // handlePopupClose={onPopupClose}
                 />}
             </>
         </UserContext.Provider>

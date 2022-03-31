@@ -60,3 +60,15 @@
 .registrationFromButton{
     margin-top: 30px;
 }
+
+@media screen and (max-width: 425px) {
+    .registration{
+        width: 90%;
+    }
+    .button-registration__option{
+        line-height: 40px;
+    }
+    .registration__form{
+        padding: 0 20px;
+    }
+}

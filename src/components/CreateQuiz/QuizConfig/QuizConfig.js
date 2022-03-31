@@ -14,15 +14,7 @@ function QuizConfig(props) {
     let quiz = {};
     let quizTitle = '';
     let quizView = 'single';
-    let quizId = '';
     let createQuiz = props.createQuiz;
-    // let quizId = '';
-    // if (props.quizConfig !== '' || props.quizConfig !== undefined || !createQuiz){
-    //     quizTitle = props.quizConfig.title;
-    //     quizView = props.quizConfig.view;
-    //     quizId = props.quizConfig.id;
-    // }
-    // console.log(newQuiz,newQuiz.length,newQuiz.quiz);
 
     if(newQuiz.quiz){
         quizTitle = newQuiz.quiz.title
@@ -43,12 +35,6 @@ function QuizConfig(props) {
         }else{
             props.createConfigSubmit(quiz);
         }
-
-        // console.log(quizId);
-        // else{
-        //     console.log(quiz);
-        //     props.handleNewSubmit(quiz);
-        // }
     }
 
     return (

@@ -20,9 +20,6 @@ function CreateQuiz(props) {
         }
     },[newData])
 
-    // console.log(newQuiz.quiz);
-    // console.log(newData);
-
     if (createQuiz && newQuiz.quiz !== undefined){
         quiz = newQuiz.quiz;
         questions = newQuiz.questions;
@@ -31,19 +28,15 @@ function CreateQuiz(props) {
         props.editQuizConfigOpen();
     }
     function editQuestion(index) {
-        // console.log(index)
-        // console.log(newQuiz)
         props.editQuestionOpen(index);
     }
     function addQuestionOpen() {
         props.addQuestionOpen();
     }
     function deleteQuestion(index) {
-        // console.log(index)
         props.deleteQuestion(index);
     }
     function handleSubmitQuiz() {
-        // console.log(newQuiz.questions.length);
         if (newQuiz.questions.length < 2){
             alert("please add minimum 2 questions!");
         }else{

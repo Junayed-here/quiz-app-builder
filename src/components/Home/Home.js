@@ -1,7 +1,6 @@
 import './Home.css';
 import Quizzes from "./Quizzes/Quizzes"
 function Home(props) {
-    // console.log(props.quizzes.length)
     return (
         <div className="home">
             <div className="container">
@@ -11,7 +10,7 @@ function Home(props) {
                     </div>
                 </div>
                 {
-                    (props.quizzes.length !== 0) ? (
+                    (props.quizzes !== null && props.quizzes.length !== 0) ? (
                         <Quizzes quizzes={props.quizzes} quizEdit={props.quizEdit}/>
                     ) : (
                         <div className="noQuiz">

@@ -1,8 +1,38 @@
 <h1 align="center">Hi 👋, I'm Md. Junayed Ahmed</h1>
 <h3 align="center">A passionate frontend developer from Sylhet, Bangladesh.</h3>
 
-- 🔭 I’m currently working on [Quiz Builder App (React.js)](https://github.com/Junayed-here)
+<h3></h3>
+## 🔭 I’m currently working on [Quiz Builder App (React.js)](https://github.com/Junayed-here/quiz-app-builder)
+* ### App's features
+  * User authentication
+    * Can register
+    * Login 
+    * Logout
+  * User must be registered to access any of the pages listed below
+  * Create New Quiz
+    * Add new question
+    * Edit a question
+    * Delete a question
+    * Minimum 2 question required in order to add quiz
+    * Minimum 2 answers required to add a question
+    * Each question has option for points when correct
+    * Image can be added with question or the answers
+    * Must select a correct answer based on question type
+    * There only two type of question can be added
+      * Single select
+      * Multiple select
+    * A quiz has two view mode
+      * One question at a time
+      * All question together
+  * Edit quiz
+  * Delete quiz
+  * View or Take the quiz test
+    * After test is complete see the score
 
+
+
+
+=======================
 - 👨‍💻 All of my projects are available at [https://github.com/Junayed-here](https://github.com/Junayed-here)
 
 - 📫 How to reach me **junaid4official@gmail.com**

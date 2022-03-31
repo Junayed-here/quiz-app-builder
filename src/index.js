@@ -5,6 +5,7 @@ import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 
+//  basename='/projects/quizAppBuilder/'
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>

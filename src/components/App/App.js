@@ -31,106 +31,6 @@ function App() {
     const [questionConfigData, setQuestionConfigData] = useState('');
     const [editQuestionIndex, setEditQuestionIndex] = useState('');
 
-    const [quiz, setQuiz] = useState({
-        "quiz": {
-            "id": 1,
-            "title": "Front-end Basic",
-            "view": "all"
-        },
-        "questions": [
-            {
-                "id": 1,
-                "title": "What is HTML stands for?",
-                "img": "https://source.unsplash.com/random/300×300",
-                "points": "5",
-                "type": "single",
-                "answers": [
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Hyper Tension"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Hyper Text Machine Learning"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Hyper Text"
-                    },
-                    {
-                        "IsCorrect": true,
-                        "img": "",
-                        "title": "Hyper Text Markup Language"
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "title": "Mark client-side languages.",
-                "img": "",
-                "points": "5",
-                "type": "multiple",
-                "answers": [
-                    {
-                        "IsCorrect": true,
-                        "img": "",
-                        "title": "HTML"
-                    },
-                    {
-                        "IsCorrect": true,
-                        "img": "https://source.unsplash.com/random/200×200",
-                        "title": "CSS"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Java"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "PHP"
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "title": "Dhaka is capital of?",
-                "img": "",
-                "points": "5",
-                "type": "single",
-                "answers": [
-                    {
-                        "IsCorrect": true,
-                        "img": "",
-                        "title": "Bangladesh"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Japan"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Chili"
-                    },
-                    {
-                        "IsCorrect": false,
-                        "img": "",
-                        "title": "Denmark"
-                    }
-                ]
-            }
-        ]
-    });
-    const [selectedQuizId,setSelectedQuizId] = useState('');
-    const [quizConfigData, setQuizConfigData] = useState('');
-
-
     useEffect(()=>{
         localStorage.setItem('quizAppBuilderQuizzes', JSON.stringify(quizzes));
         // console.log(quizzes)
@@ -167,8 +67,6 @@ function App() {
     function onPopupClose() {
         setIsQuizConfigOpen(false);
         setIsAddQuestionOpen(false);
-        setEditQuestionIndex('');
-        setQuestionConfigData('');
     }
     function moveQuestion(dragIndex, hoverIndex){
         const draggedQuestion = newQuiz.questions[dragIndex];
@@ -193,8 +91,9 @@ function App() {
         setIsAddQuestionOpen(true);
     }
     function quizEdit(quizEditIndex){
-        // console.log(quizEditIndex)
+        // console.log(quizzes)
         quizzes.map((item,index)=>{
+            // console.log(item.quiz.id , quizEditIndex,newQuiz)
             if (item.quiz.id === quizEditIndex){
                 // console.log("edit ", item);
                 let selectedQuiz = item.quiz;
@@ -236,6 +135,8 @@ function App() {
             }
         });
         navigate(`/`);
+        onPopupClose();
+        setNewQuiz([]);
     }
     function questionSubmit(data) {
         // console.log(data,editQuestionIndex);
@@ -260,27 +161,35 @@ function App() {
         localStorage.setItem('quizAppBuilderQuizzes', JSON.stringify(quizzes));
     }
     function handleSubmitQuiz(data) {
-        // console.log(quizzes);
-        (quizzes !== null) ?
+        if(quizzes.length !== 0) {
+            let quizMatch = false;
+            let quizMatchId ;
             quizzes.map((item,index)=>{
                 if (item.quiz.id === data.quiz.id){
-                    setQuizzes(
-                        update(quizzes, {[index]: {$merge: data}})
-                    );
-                }else {
-                    setQuizzes(
-                        update(quizzes, {$push: [{...data}]})
-                    )
+                    quizMatch = true;
+                    quizMatchId = index;
                 }
-            })
-            :
+            });
+            // console.log(quizMatch,quizMatchId)
+            if (quizMatch){
+                setQuizzes(
+                    update(quizzes, {[quizMatchId]: {$merge: data}})
+                );
+            }else {
+                setQuizzes(
+                    update(quizzes, {$push: [{...data}]})
+                )
+            }
+        }else{
             setQuizzes(
                 update(quizzes, {$set: [{...data}]})
             )
+        }
         // console.log(data);
-        // console.log(quizzes);
+        // console.log( quizzes);
         handleQuizAddDb();
-        setNewQuiz('');
+        onPopupClose();
+        setNewQuiz([]);
         navigate('/');
     }
 
@@ -327,7 +236,7 @@ function App() {
                         }/>
 
                         <Route path="/view/:quizId" element={
-                            <ViewQuiz quizzes={quizzes} quiz={quiz}/>
+                            <ViewQuiz quizzes={quizzes}/>
                         }/>
                     </Route>
 

@@ -11,7 +11,7 @@ function Home(props) {
                     </div>
                 </div>
                 {
-                    (props.quizzes > 0) ? (
+                    (props.quizzes.length !== 0) ? (
                         <Quizzes quizzes={props.quizzes} quizEdit={props.quizEdit}/>
                     ) : (
                         <div className="noQuiz">

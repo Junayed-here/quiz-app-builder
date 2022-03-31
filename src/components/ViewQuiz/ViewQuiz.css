@@ -2,6 +2,7 @@
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
+    padding-top: 30px;
 }
 .ViewQuiz__title {
     font-family: 'Inter', sans-serif;
@@ -13,16 +14,22 @@
     color: #fff;
 }
 .viewQuestion__box{
-    background-color: #fff;
-    margin-bottom: 20px;
     padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
+}
+.viewQuestion__box:last-child{
+    margin-bottom: 0;
 }
 .label_answerCheckBox{
-    border: 2px dotted limegreen;
+    border: 2px dotted #00FFFA;
     padding: 5px;
 }
-.label_answerCheckBox:hover{
-    background-color: limegreen;
+.button_singleView_next{
+    margin-top: 30px;
 }
 .answerCheckBox{
     margin-right: 10px;
@@ -40,7 +47,10 @@
     max-width: 450px;
     width: 100%;
     min-height: 300px;
-    background-color: #fff;
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -57,13 +67,21 @@
     font-size: 36px;
     margin: 0;
     text-align: center;
-    color: #000;
+    color: #80cbff;
 }
 .scoreBoard__score{
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 54px;
     margin: 0;
     text-align: center;
-    color: #000;
+    color: #80cbff;
+}
+.scoreBoard__home_link{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+    color: #80cbff;
 }

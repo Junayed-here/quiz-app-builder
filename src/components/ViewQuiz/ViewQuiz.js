@@ -17,7 +17,6 @@ function ViewQuiz(props) {
     const quizzes = props.quizzes;
     let totalPoints = 0;
     let quiz , questions, quizView = '';
-    const quizViewAll = (quizView === "all");
     if (quizzes.length > 0){
         quizzes.map((item,index)=>{
             if(item.quiz.id === quizId){
@@ -27,6 +26,7 @@ function ViewQuiz(props) {
             }
         });
     }
+    const quizViewAll = (quizView === "all");
     const [score, setScore] = useState(0);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [allAnswered, setAllAnswered] = useState(false);
@@ -146,7 +146,7 @@ function ViewQuiz(props) {
         }
     }
 
-    // console.log(allAnswered);
+    console.log(allAnswered);
     return(
         <>
             {
@@ -262,13 +262,13 @@ function ViewQuiz(props) {
                                     ?
                                     (
                                         <>
-                                            <button className="button" onClick={handleFinishTest}>Submit</button>
+                                            <button className="button button_singleView_next button-blue" onClick={handleFinishTest}>Submit</button>
                                         </>
                                     )
                                     :
                                     (
                                         <>
-                                            <button className="button button_singleView_next" onClick={handleNextQuestion}>{(allAnswered ? "Submit" : "Next")}</button>
+                                            <button className="button button_singleView_next button-blue" onClick={handleNextQuestion}>{(allAnswered ? "Submit" : "Next")}</button>
                                         </>
                                     )
                             }
@@ -280,7 +280,7 @@ function ViewQuiz(props) {
                         <div className="scoreBoard">
                             <h1 className="scoreBoard__title">Out of {totalPoints} Your score is.</h1>
                             <h1 className="scoreBoard__score">{score}</h1>
-                            <a href="/">Go to home page</a>
+                            <a href="/" className='scoreBoard__home_link'>Go to home page</a>
                         </div>
                     )
             }

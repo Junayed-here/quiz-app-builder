@@ -4,11 +4,17 @@
     font-size: 16px;
     width: 100%;
     display: block;
-    border: 1px solid #f5f5f5;
     padding: 10px 15px;
-    border-radius: 5px;
     margin-top: 10px;
+    border-radius: 5px;
+    color: #fff;
+    border: 1px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
 }
 .select:focus{
     outline: 1px solid #bbb;
+}
+.select option{
+    color: #000;
 }

@@ -1,0 +1,22 @@
+.nav_bar .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #00FFFA;
+}
+.Nav__userInfo{
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #00FFFA;
+    margin: 0;
+}
+.nav_menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    gap: 30px;
+}

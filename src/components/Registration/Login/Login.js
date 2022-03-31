@@ -10,7 +10,7 @@ function Login(props) {
         props.handleLogin({email,password});
     }
     return (
-        <Form handleSubmit={handleSubmit}>
+        <Form handleSubmit={handleSubmit}  customClass="registration__form">
             <fieldset className="fieldset">
                 <Input
                     type="email"
@@ -31,7 +31,7 @@ function Login(props) {
                 />
             </fieldset>
 
-            <button className="button button__role-submit registrationFromButton" type="submit">Submit</button>
+            <button className="button button__role-submit registrationFromButton button-blue" type="submit">Submit</button>
         </Form>
     );
 }

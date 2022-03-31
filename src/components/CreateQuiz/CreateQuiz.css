@@ -6,8 +6,8 @@
 }
 .createQuiz__title{
     font-family: 'Inter', sans-serif;
-    font-size: 48px;
     font-weight: 400;
+    font-size: 36px;
     color: #fff;
     margin: 0;
 }
@@ -15,6 +15,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     color: #fff;
+    font-size: 18px;
     margin: 0;
 }
 .createQuiz__view{
@@ -24,42 +25,64 @@
 .createQuiz__ConfigView{
     max-width: 450px;
     width: 100%;
-    background-color: #fff;
     height: max-content;
-    padding: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
 }
 .createQuiz__ConfigView__title{
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 28px;
     margin: 0;
+    color: #00FFFA;
 }
 .createQuiz__ConfigView__view{
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 20px;
     margin: 10px 0 20px 0;
+    color: #00FFFA;
 }
 .createQuiz__ConfigView__actions{
     display: flex;
     justify-content: space-between;
+    gap: 20px;
 }
 .createQuiz__questions{
     width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
+}
+.createQuiz__questions > .button{
+    margin-bottom: 20px;
 }
 .createQuiz__question{
     width: 100%;
-    background-color: #fff;
+    color: #00FFFA;
     height: max-content;
-    padding: 30px;
     position: relative;
     margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
+}
+.createQuiz__question:last-child{
+    margin-bottom: 0;
 }
 .createQuiz__questionTitle{
     font-family: 'Roboto Slab', sans-serif;
     font-weight: 400;
     font-size: 20px;
     margin: 0;
+    color: #00FFFA;
 }
 .createQuiz__question_img,.createQuiz__question__answer__img{
     max-width: 150px;
@@ -74,10 +97,6 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
     align-items: end;
-}
-.createQuiz__question__answer.correct {
-    border: 2px dotted green;
-    padding: 2px;
 }
 .createQuiz__question__answer__title{
     font-family: 'Roboto Slab', sans-serif;
@@ -94,8 +113,11 @@
     left: 0;
     width: 15px;
     height: 15px;
-    border: 1px solid #000;
+    border: 1px solid #00FFFA;
     border-radius: 50%;
+}
+.createQuiz__question__answer.correct .createQuiz__question__answer__title:before{
+    background-color:  #00FFFA;
 }
 .createQuiz__question__config{
     display: flex;

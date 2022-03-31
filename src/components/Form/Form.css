@@ -1,13 +1,17 @@
 .form{
     width: 100%;
-    border: none;
     margin: 0 auto;
     padding: 30px 50px;
-    background-color: #fff;
+
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
+
 }
 .popup-form{
     padding: 15px;
-    padding-bottom: 50px;
+    padding-bottom: 60px;
 }
 .formError{
     display: block;

@@ -10,12 +10,12 @@ function Signup(props) {
         const user = {name,email,password};
         props.handleSignUp(user);
         props.openLogin();
-        console.log("Signup Successful");
+        // console.log("Signup Successful");
         // localStorage.setItem('quizAppBuilder', JSON.stringify(user));
 
     }
     return (
-        <Form handleSubmit={handleSubmit}>
+        <Form handleSubmit={handleSubmit} customClass="registration__form">
             <fieldset className="fieldset">
                 <Input
                     type="text"
@@ -46,7 +46,7 @@ function Signup(props) {
                 />
             </fieldset>
 
-            <button className="button button__role-submit registrationFromButton" type="submit">Submit</button>
+            <button className="button button__role-submit registrationFromButton button-blue" type="submit">Submit</button>
         </Form>
     );
 }

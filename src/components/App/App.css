@@ -4,7 +4,7 @@
 .app{
     min-height: 100vh;
     width: 100%;
-    background-color: #2B2B2B;
+    background-color: #000D27;
 }
 .container{
     max-width: 1170px;
@@ -13,8 +13,9 @@
     margin: 0 auto;
 }
 .box-border {
-    border: 1px dotted red !important;
-    margin: 5px 0 !important;
+    border: 1px dotted #00FFFA !important;
+    margin: 0;
+    margin-top: 20px;
     padding: 15px !important;
 }
 /* button css*/
@@ -36,7 +37,7 @@
     height: 25px;
     width: 30px;
     border-radius: 5px;
-    padding: 3px 5px;
+    padding: 5px;
     background-color: #fff;
     border-color: #000;
 }
@@ -44,28 +45,37 @@
     width: 100%;
     height: 100%;
 }
-.button-delete {
-    background-color: #ff9d9d;
-    border-color: #ff9d9d;
+
+
+.button-blue{
+    border: none;
+    color: #fff;
+    transition: all .4s ease-in-out;
+    background: rgba(0, 255, 250, 0.2);
+    box-shadow: 0px -4px 4px rgba(0, 255, 250, 0.2), 0px 4px 4px rgba(0, 255, 250, 0.2), inset 0px 0px 6px rgba(0, 255, 250, 0.8);
 }
-.button-delete:hover{
-    background-color: #ff5454;
-    border-color: #ff5454;
+.button-blue:hover{
+    background-color: rgba(0, 255, 250, 0.6);
 }
-.button-edit{
-    background-color: #45b12e;
-    border-color: #45b12e;
+
+.button-red{
+    border: none;
+    color: #fff;
+    transition: all .4s ease-in-out;
+    background: rgba(253, 61, 1, 0.3);
+    box-shadow: 0px -4px 4px rgba(253, 61, 1, 0.2), 0px 4px 4px rgba(253, 61, 1, 0.2), inset 0px 0px 6px rgba(253, 61, 1, 0.8);
 }
-.button-edit:hover{
-    background-color: #136e00;
-    border-color: #136e00;
+.button-red:hover{
+    background-color: rgb(253, 61, 1);
 }
-.button-drag{
-    background-color: #6e7bf1;
-    border-color: #6e7bf1;
+.button-green{
+    border: none;
+    color: #fff;
+    transition: all .4s ease-in-out;
+    background: rgba(73, 176, 61, 0.3);
+    box-shadow: 0px -4px 4px rgba(73, 176, 61, 0.2), 0px 4px 4px rgba(73, 176, 61, 0.2), inset 0px 0px 6px rgba(73, 176, 61, 0.8);
 }
-.button-drag:hover{
-    background-color: #2e3bb1;
-    border-color: #2e3bb1;
+.button-green:hover{
+    background-color: rgb(73, 176, 61);
 }
 /* button css*/

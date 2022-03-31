@@ -54,7 +54,7 @@ function Answer(props) {
                 {
                     !deleteAnswerHidden &&
                     (
-                        <button className="button button-withIcon button-delete"
+                        <button className="button button-withIcon button-delete button-red"
                                 type="button"
                                 onClick={()=>props.deleteAnswer(`removeId-${randomId}`)}
                         >
@@ -151,7 +151,7 @@ function AddQuestion(props) {
         }
     }
     function addAnswer() {
-        console.log(answers)
+        // console.log(answers)
         const blankAnswer = {
             'IsCorrect': false,
             'img': "",
@@ -185,7 +185,7 @@ function AddQuestion(props) {
                 <div className="createQuizQuestion">
                     <Form customClass="popup-form" handleSubmit={handleFormSubmit}>
                         <input type="hidden" id="createQuizQuestionId" value=""/>
-                        <fieldset className="fieldset box-border fieldset__quizQuestion">
+                        <fieldset className="fieldset fieldset__quizQuestion">
                             <Input
                                 label="Question title:"
                                 className="input"
@@ -240,10 +240,10 @@ function AddQuestion(props) {
                             }
                         </fieldset>
                         <fieldset className="fieldset fromActionBox" id="addQuestionAction">
-                            <button className="button" type="button"
+                            <button className="button button-blue" type="button"
                                     onClick={addAnswer}>Add answer</button>
-                            <button className="button" type="submit">Done</button>
-                            <button className="button" type="reset" onClick={props.onClose}>Cancel</button>
+                            <button className="button button-green" type="submit">Done</button>
+                            <button className="button button-red" type="reset" onClick={props.onClose}>Cancel</button>
                         </fieldset>
                     </Form>
                 </div>

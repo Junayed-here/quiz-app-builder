@@ -3,17 +3,35 @@
 }
 .home__top_info{
     margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .home__title{
     font-family: 'Inter', sans-serif;
     font-size: 48px;
     font-weight: 400;
-    color: #fff;
+    color: #00FFFA;
     margin: 0;
 }
-.hope_subheading{
+.noQuiz{
+    width: 100%;
+    height: 350px;
+    position: relative;
+    border-radius: 15px;
+    border: 2px solid #80cbff;
+    background: rgb(0 255 250 / 5%);
+    box-shadow: 0px -4px 4px rgb(0 255 250 / 20%), 0px 4px 4px rgb(0 255 250 / 20%), inset 0px 0px 6px rgb(0 255 250 / 80%);
+
+}
+.noQuiz__text{
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     color: #fff;
+    font-size: 18px;
     margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }

@@ -20,8 +20,8 @@ function CreateQuiz(props) {
         }
     },[newData])
 
-    console.log(newQuiz.quiz);
-    console.log(newData);
+    // console.log(newQuiz.quiz);
+    // console.log(newData);
 
     if (createQuiz && newQuiz.quiz !== undefined){
         quiz = newQuiz.quiz;
@@ -31,17 +31,24 @@ function CreateQuiz(props) {
         props.editQuizConfigOpen();
     }
     function editQuestion(index) {
+        // console.log(index)
+        // console.log(newQuiz)
         props.editQuestionOpen(index);
     }
     function addQuestionOpen() {
         props.addQuestionOpen();
     }
-    function handleSubmitQuiz() {
-        props.handleSubmitQuiz({...props.newQuiz});
-    }
     function deleteQuestion(index) {
-        console.log(index)
+        // console.log(index)
         props.deleteQuestion(index);
+    }
+    function handleSubmitQuiz() {
+        // console.log(newQuiz.questions.length);
+        if (newQuiz.questions.length < 2){
+            alert("please add minimum 2 questions!");
+        }else{
+            props.handleSubmitQuiz({...props.newQuiz});
+        }
     }
 
     return (
@@ -56,12 +63,12 @@ function CreateQuiz(props) {
                         <h3 className="createQuiz__ConfigView__title">{quiz.title}</h3>
                         <p className="createQuiz__ConfigView__view">Question view: {quiz.view}</p>
                         <div className="createQuiz__ConfigView__actions">
-                            <button className="button" onClick={editConfig}>Edit Quiz Config</button>
-                            <button className="button" onClick={addQuestionOpen}>Add Question</button>
-                            <button className="button" onClick={handleSubmitQuiz}>Submit</button>
+                            <button className="button button-blue" onClick={editConfig}>Edit Config</button>
+                            <button className="button button-blue" onClick={handleSubmitQuiz}>Submit</button>
                         </div>
                     </div>
                     <div className="createQuiz__questions">
+                        <button className="button button-blue" onClick={addQuestionOpen}>Add Question</button>
                         {
                             (questions !== '')
                                 ?
@@ -75,8 +82,8 @@ function CreateQuiz(props) {
                                 </DndProvider>
                                 :
                                 <>
-                                    <div className="no_data">
-                                        <p className="no_data__text">Empty</p>
+                                    <div className="noQuiz">
+                                        <p className="noQuiz__text">You haven't added any question yet.</p>
                                     </div>
                                 </>
                         }

@@ -86,13 +86,13 @@ const Question = ({ question, index, questionIndex, moveQuestion, handleEditQues
                 <p className="createQuiz__question__config__text">Type: {question.type}</p>
             </div>
             <div className="createQuiz__question__actions">
-                <button ref={dragRef} className="button button-withIcon button-drag" title="drag to Rearrange question">
+                <button ref={dragRef} className="button button-withIcon button-blue" title="drag to Rearrange question">
                     <img src={dragIcon} alt="drag"/>
                 </button>
-                <button className="button button-withIcon button-edit" title="edit question" onClick={onEditQuestion}>
+                <button className="button button-withIcon button-green" title="edit question" onClick={onEditQuestion}>
                     <img src={editIcon} alt="edit"/>
                 </button>
-                <button className="button button-withIcon button-delete" onClick={onDeleteQuestion} title="delete question">
+                <button className="button button-withIcon button-red" onClick={onDeleteQuestion} title="delete question">
                     <img src={deleteIcon} alt="delete"/>
                 </button>
             </div>
@@ -101,7 +101,6 @@ const Question = ({ question, index, questionIndex, moveQuestion, handleEditQues
 };
 
 const QuestionList = (props) => {
-    console.log(props.questions)
     const renderQuestion = (question, index) => {
         return question ? (
             <Question

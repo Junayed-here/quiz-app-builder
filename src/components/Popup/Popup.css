@@ -4,7 +4,10 @@
     left: 0;
     width: 100%;
     min-height: 100vh;
-    background: #000;
+    background: linear-gradient(134.18deg, rgba(0, 0, 0, 0.4) 11.92%, rgba(0, 0, 0, 0.1) 86.39%);
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(40px);
+    border-radius: 40px 0;
 }
 .popup__close{
     position: absolute;

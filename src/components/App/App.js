@@ -11,6 +11,7 @@ import AddQuestion from "../CreateQuiz/AddQuestion/AddQuestion";
 import QuizConfig from "../CreateQuiz/QuizConfig/QuizConfig";
 import ViewQuiz from "../ViewQuiz/ViewQuiz";
 import update from "immutability-helper";
+import Nav from "../Navigation/Navigation";
 
 // import UserContext from '../../context/UserContext'
 // const user = React.useContext(UserContext);
@@ -132,62 +133,58 @@ function App() {
 
     useEffect(()=>{
         localStorage.setItem('quizAppBuilderQuizzes', JSON.stringify(quizzes));
-        console.log(quizzes)
+        // console.log(quizzes)
     },[quizzes]);
-    useEffect(()=>{
-        console.log(newQuiz);
-    },[newQuiz])
+    // useEffect(()=>{
+    //     console.log(newQuiz);
+    // },[newQuiz])
     function handleSignUp(data) {
         localStorage.setItem('quizAppBuilderUser', JSON.stringify(data));
     }
     function handleLogin(data) {
         const userDB = JSON.parse(localStorage.getItem('quizAppBuilderUser'));
-        if (userDB.email === data.email && userDB.password === data.password){
-            const {name,email} = userDB;
-            localStorage.setItem('quizAppBuilderLoggedInUser', JSON.stringify({name,email}));
-            setUser({name,email});
-            setLoggedIn(true);
-            navigate(`/`);
-            console.log("Signup Successful");
-        }else{
-            alert("email or password didn't match!");
+        if (userDB !== null && userDB !== undefined){
+            if (userDB.email === data.email && userDB.password === data.password){
+                const {name,email} = userDB;
+                localStorage.setItem('quizAppBuilderLoggedInUser', JSON.stringify({name,email}));
+                setUser({name,email});
+                setLoggedIn(true);
+                navigate(`/`);
+                // console.log("Signup Successful");
+            }else{
+                alert("email or password didn't match!");
+            }
+        }else {
+            alert("User don't exist!  Please register first");
         }
+
+    }
+    function handleLogout() {
+        localStorage.removeItem('quizAppBuilderLoggedInUser');
+        setLoggedIn(false);
     }
 
     function onPopupClose() {
         setIsQuizConfigOpen(false);
         setIsAddQuestionOpen(false);
+        setEditQuestionIndex('');
+        setQuestionConfigData('');
     }
     function moveQuestion(dragIndex, hoverIndex){
         const draggedQuestion = newQuiz.questions[dragIndex];
         setNewQuiz(
             update(newQuiz, {'questions': {$splice: [[dragIndex, 1], [hoverIndex, 0, draggedQuestion]]}})
         );
-        // if (createQuiz){
-        //     const draggedQuestion = newQuiz.questions[dragIndex];
-        //     setNewQuiz(
-        //         update(newQuiz, {'questions': {$splice: [[dragIndex, 1], [hoverIndex, 0, draggedQuestion]]}})
-        //     );
-        // } else{
-        //     const draggedQuestion = quiz.questions[dragIndex];
-        //     setNewQuiz(
-        //         update(newQuiz, {'questions': {$splice: [[dragIndex, 1], [hoverIndex, 0, draggedQuestion]]}})
-        //     );
-        // }
-
     }
 
     function newQuizConfigOpen() {
         setCreateQuiz(true);
-        // setQuizConfigData('');
         setIsQuizConfigOpen(true);
     }
     function editQuizConfigOpen() {
-        // setQuizConfigData('');
         setIsQuizConfigOpen(true);
     }
     function addQuestionOpen() {
-        // setQuestionConfigData('');
         setIsAddQuestionOpen(true);
     }
     function editQuestionOpen(index){
@@ -195,12 +192,11 @@ function App() {
         setQuestionConfigData(newQuiz.questions[index]);
         setIsAddQuestionOpen(true);
     }
-
     function quizEdit(quizEditIndex){
-        console.log(quizEditIndex)
+        // console.log(quizEditIndex)
         quizzes.map((item,index)=>{
             if (item.quiz.id === quizEditIndex){
-                console.log("edit ", item);
+                // console.log("edit ", item);
                 let selectedQuiz = item.quiz;
                 let selectedQuizQuestion = item.questions;
                 setNewQuiz(
@@ -226,16 +222,13 @@ function App() {
         onPopupClose();
     }
     function deleteQuestion(index) {
-        console.log(index);
-        // update(newQuiz, {'quiz': {$merge: data}})
+        // console.log(index);
         setNewQuiz(
             update(newQuiz, {'questions': { $splice: [[index, 1]] } })
         )
     }
     function deleteQuiz(deleteIndex) {
-        // console.log(deleteIndex);
         quizzes.map((item,index)=>{
-            console.log(deleteIndex,index);
             if (item.quiz.id === deleteIndex){
                 setQuizzes(
                     update(quizzes, { $splice: [[index, 1]] })
@@ -245,67 +238,30 @@ function App() {
         navigate(`/`);
     }
     function questionSubmit(data) {
-        console.log(data);
+        // console.log(data,editQuestionIndex);
         if (editQuestionIndex !== ''){
             setNewQuiz(
                 update(newQuiz, {'questions': {[editQuestionIndex]: {$merge: data}}})
             )
-        }
-        if (newQuiz.questions.length === 0 && editQuestionIndex === ''){
-            setNewQuiz(
-                update(newQuiz, {'questions': {$set: [{...data}]}})
-            )
         }else{
-            setNewQuiz(
-                update(newQuiz, {'questions': {$push: [{...data}]}})
-            )
+            if (newQuiz.questions.length === 0 && editQuestionIndex === ''){
+                setNewQuiz(
+                    update(newQuiz, {'questions': {$set: [{...data}]}})
+                )
+            }else{
+                setNewQuiz(
+                    update(newQuiz, {'questions': {$push: [{...data}]}})
+                )
+            }
         }
         onPopupClose();
     }
-
-    // function editQuestionSubmit(data) {
-    //     console.log(data);
-    //     setNewQuiz(
-    //         update(newQuiz, {'questions': {[index]: {$merge: data}}})
-    //     )
-    //     onPopupClose();
-    // }
-    // function addQuestionOpen(index) {
-    //     setQuestionConfigIndex(index);
-    //     setCreateQuiz(false);
-    //     setQuestionConfigData(quiz.questions[index])
-    //     setIsAddQuestionOpen(true);
-    // }
-    // function quizConfigOpen(data) {
-    //     setQuizConfigData(data)
-    //     setIsQuizConfigOpen(true);
-    // }
-    //
-    // function handleQuizConfigSubmit(data) {
-    //     setQuiz(
-    //         update(quiz, {'quiz': {$merge: data}})
-    //     );
-    //     onPopupClose();
-    // }
-    // function handleNewAddQuestionSubmit(data) {
-    //     (newQuiz.questions !== undefined)
-    //         ?
-    //         setNewQuiz(
-    //             update(newQuiz, {'questions': {$push: [{...data}]}})
-    //         )
-    //         :
-    //         setNewQuiz(
-    //             update(newQuiz, {'questions': {$set: [{...data}]}})
-    //         )
-    //     onPopupClose();
-    // }
-    //
-
     function handleQuizAddDb() {
         localStorage.setItem('quizAppBuilderQuizzes', JSON.stringify(quizzes));
     }
     function handleSubmitQuiz(data) {
-        (quizzes.length > 0) ?
+        // console.log(quizzes);
+        (quizzes !== null) ?
             quizzes.map((item,index)=>{
                 if (item.quiz.id === data.quiz.id){
                     setQuizzes(
@@ -321,37 +277,27 @@ function App() {
             setQuizzes(
                 update(quizzes, {$set: [{...data}]})
             )
-        console.log(data);
-        console.log(quizzes);
+        // console.log(data);
+        // console.log(quizzes);
         handleQuizAddDb();
-
+        setNewQuiz('');
+        navigate('/');
     }
 
 
-    {/*<nav>*/}
-    {/*    <ul>*/}
-    {/*        <li>*/}
-    {/*            <NavLink to="/">Home</NavLink>*/}
-    {/*        </li>*/}
-    {/*        <li>*/}
-    {/*            <NavLink to={`/create`}>create</NavLink>*/}
-    {/*        </li>*/}
-    {/*        <li>*/}
-    {/*            <NavLink to="/view/1">View</NavLink>*/}
-    {/*        </li>*/}
-    {/*    </ul>*/}
-    {/*</nav>*/}
+
     return (
         <UserContext.Provider value={user}>
             <>
                 <Routes>
-
                     <Route element={<ProtectedRoute loggedIn={loggedIn}/>}>
                         <Route exact path='/' element={
-                            <Home quizzes={quizzes}
-                                quizEdit={quizEdit}
-                                handleNewQuizConfigOpen={newQuizConfigOpen}
-                            />
+                            <>
+                                <Nav handleNewQuizConfigOpen={newQuizConfigOpen} handleLogout={handleLogout}/>
+                                <Home quizzes={quizzes}
+                                      quizEdit={quizEdit}
+                                />
+                            </>
                         }/>
                         <Route exact path='/create' element={
                             <CreateQuiz

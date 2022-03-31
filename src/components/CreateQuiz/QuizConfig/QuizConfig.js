@@ -82,8 +82,8 @@ function QuizConfig(props) {
                             </Select>
                         </fieldset>
                         <fieldset className="fieldset fromActionBox">
-                            <button className="button" type="submit">Done</button>
-                            <button className="button" type="reset" onClick={props.onClose}>Cancel</button>
+                            <button className="button  button-blue" type="submit">Done</button>
+                            <button className="button  button-red" type="reset" onClick={props.onClose}>Cancel</button>
                         </fieldset>
                     </Form>
                 </div>

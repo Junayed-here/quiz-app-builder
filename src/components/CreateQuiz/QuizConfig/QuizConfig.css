@@ -21,7 +21,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 15px;
-    padding-right: 32px;
-    background-color: #fff;
+    padding: 20px;
+    background-color: transparent;
 }

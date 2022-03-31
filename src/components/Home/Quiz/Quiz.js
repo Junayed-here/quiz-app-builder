@@ -12,7 +12,7 @@ function Quiz(props) {
     }
     return (
         <div className="quiz">
-            <button onClick={edit} className="button button-withIcon button-edit quizEditButton" title="edit quiz">
+            <button onClick={edit} className="button button-withIcon button-green quizEditButton" title="edit quiz">
                 <img src={editIcon} alt="edit"/>
             </button>
             {/*<div className="quiz__image_box">*/}
@@ -26,7 +26,7 @@ function Quiz(props) {
                     {/*<p className="quiz__info-text">Basic</p>*/}
                 </div>
 
-                <a href={`/view/${props.quiz.quiz.id}`} className="button quiz__getStarted_button">Get Started</a>
+                <a href={`/view/${props.quiz.quiz.id}`} className="button quiz__getStarted_button button-blue">Get Started</a>
             </div>
         </div>
     );

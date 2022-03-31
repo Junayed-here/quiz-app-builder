@@ -146,7 +146,7 @@ function ViewQuiz(props) {
         }
     }
 
-    console.log(allAnswered);
+    // console.log(allAnswered);
     return(
         <>
             {

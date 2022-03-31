@@ -16,8 +16,8 @@ function Registration(props) {
             <p className="subheading registration__subheading">Please register or login</p>
             <div className="registration__form_window">
                 <div className="registration__option">
-                    <button className={`button button-registration__option `+ (loginTab ? 'active' : '')} onClick={clickLogin}>Login</button>
-                    <button className={`button button-registration__option `+ (loginTab ? '' : 'active')} onClick={clickSignup}>Register</button>
+                    <button className={`button button-registration__option  button-blue `+ (loginTab ? 'active' : '')} onClick={clickLogin}>Login</button>
+                    <button className={`button button-registration__option button-blue `+ (loginTab ? '' : 'active')} onClick={clickSignup}>Register</button>
                 </div>
                 { loginTab ? <Login handleLogin={props.handleLogin}/> : <Signup handleSignUp={props.handleSignUp} openLogin={clickLogin}/>}
             </div>

@@ -32,11 +32,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 90%;
+    margin-left: 5%;
 }
 .button-registration__option{
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
-    border: 1px solid #fff;
+    border: 2px solid #80cbff;
     color: #fff;
     font-size: 20px;
     line-height: 50px;
@@ -52,9 +54,8 @@
     background-color: transparent;
 }
 .button-registration__option.active{
-    color: #000;
-    background-color: #fff;
     opacity: 1;
+    background: rgb(0 255 250 / 41%);
 }
 .registrationFromButton{
     margin-top: 30px;

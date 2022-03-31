@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/quiz-app-builder/static/css/main.130fbd2d.css",
-    "main.js": "/quiz-app-builder/static/js/main.2e71efce.js",
+    "main.js": "/quiz-app-builder/static/js/main.c5c747e7.js",
     "static/js/787.1f36b305.chunk.js": "/quiz-app-builder/static/js/787.1f36b305.chunk.js",
     "static/media/roboto-slab-700.woff": "/quiz-app-builder/static/media/roboto-slab-700.7cb09bef6990e87c9e2b.woff",
     "static/media/roboto-slab-400-regular.woff": "/quiz-app-builder/static/media/roboto-slab-400-regular.b46b2661355d7b1e9e9e.woff",
@@ -25,11 +25,11 @@
     "static/media/close.svg": "/quiz-app-builder/static/media/close.118074baed770c43e4bc4451ed78f91d.svg",
     "static/media/edit.svg": "/quiz-app-builder/static/media/edit.8667ac4a523e8fc42e59641845fc8448.svg",
     "main.130fbd2d.css.map": "/quiz-app-builder/static/css/main.130fbd2d.css.map",
-    "main.2e71efce.js.map": "/quiz-app-builder/static/js/main.2e71efce.js.map",
+    "main.c5c747e7.js.map": "/quiz-app-builder/static/js/main.c5c747e7.js.map",
     "787.1f36b305.chunk.js.map": "/quiz-app-builder/static/js/787.1f36b305.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.130fbd2d.css",
-    "static/js/main.2e71efce.js"
+    "static/js/main.c5c747e7.js"
   ]
 }
